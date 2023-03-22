@@ -1,0 +1,21 @@
+pipeline {
+    agent any
+    stages{
+        stage('docker image Execution') {
+           agent { docker {image 'python:latest'} }
+        stages {
+        stage('Checkout') {
+            steps {
+                checkout([$class: 'GitSCM', branches: [[name: '*/vinod']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Patlollavinod/TPJ_jenkins.git']]])
+            }
+        }
+        stage('Run python program') {
+            steps {
+                git branch: 'vinod', url: 'https://github.com/Patlollavinod/TPJ_jenkins.git'
+                sh 'python main.py L1.txt L2.txt R.txt'
+            }
+        }                 
+           }
+        }
+    }
+}
