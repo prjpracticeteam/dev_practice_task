@@ -11,7 +11,7 @@ pipeline {
                 sh 'docker build .'
             }
         }
-        stage('git '){
+        stage(' '){
             steps{
                 git branch: 'feat-project2', url: 'https://github.com/prjpracticeteam/githubpractice.git'
             }
