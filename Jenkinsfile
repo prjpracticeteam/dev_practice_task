@@ -1,19 +1,19 @@
 pipeline {
     agent any
     stages {
-        stage('docker image  build') {
+        stage('checkout') {
             steps {
-                sh 'docker build .'
+                checkout([$class: 'GitSCM', branches: [[name: '*/task_docker']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/prjpracticeteam/dev_practice_task.git']]])
             }
         }
-        stage('checkout '){
+        stage('docker image build '){
             steps{
-                checkout([$class: 'GitSCM', branches: [[name: '*/feat-project2']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/prjpracticeteam/githubpractice.git']]])
+               sh 'docker build -t my-python .' 
             }
         }
         stage('git '){
             steps{
-                git branch: 'feat-project2', url: 'https://github.com/prjpracticeteam/githubpractice.git'
+                git branch: 'task_docker', url: 'https://github.com/prjpracticeteam/dev_practice_task.git'
             }
         }
     }
