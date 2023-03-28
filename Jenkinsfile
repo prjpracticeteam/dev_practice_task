@@ -14,6 +14,7 @@ pipeline {
         stage('git '){
             steps{
                 git branch: 'task_docker', url: 'https://github.com/prjpracticeteam/dev_practice_task.git'
+                sh 'python3 hashmap.py'
             }
         }
     }
